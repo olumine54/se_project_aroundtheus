@@ -28,4 +28,4 @@ This is a project where a FIGMA ui file is used to present diferrent layout incl
 
 **Githubpage Link**
 
-- [link to the project]()
+- [link to the project](https://olumine54.github.io/se_project_aroundtheus/)
