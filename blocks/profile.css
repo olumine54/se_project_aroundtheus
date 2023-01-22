@@ -24,6 +24,7 @@
   border: 1px solid #fff;
   margin-left: 18px;
   background-size: auto auto;
+  cursor: pointer;
 }
 
 .profile__edit-button:hover {
@@ -37,6 +38,7 @@
   margin-left: auto;
   border: 2px solid #fff;
   cursor: pointer;
+  border-radius: 2px;
 }
 
 .profile__add-button:hover {
@@ -55,9 +57,10 @@
 }
 
 .profile__description {
+  font-family: "Inter", "Arial", sans-serif;
   font-size: 18px;
   line-height: 22px;
-  font-weight: 500;
+  font-weight: 400;
   grid-area: description;
   margin: 0;
   margin-top: 14px;
@@ -109,6 +112,9 @@
     margin-left: 19px;
     margin-right: 19px;
     padding: 0;
+    margin-top: 36px;
+    margin-bottom: 36px;
+    background-size: 16px 16px;
   }
 
   .profile__edit-button {

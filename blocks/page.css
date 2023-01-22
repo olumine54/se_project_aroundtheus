@@ -23,8 +23,3 @@
     max-width: calc(100% - 38px);
   }
 }
-@media screen and (max-width: 760px) {
-  .page__section {
-    max-width: calc(100% - 38px);
-  }
-}

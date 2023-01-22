@@ -1,8 +1,14 @@
 .card__title {
   font-family: "Inter", "Arial", sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  margin-bottom: 0;
+  margin-top: 0;
 }
 
 .card {
@@ -34,8 +40,13 @@
   background: transparent url(../images/Vectorlike.svg) center no-repeat;
   width: 21px;
   height: 18px;
+  flex-shrink: 0;
+  border: none;
+  transition: 0.5s ease-in;
+  cursor: pointer;
 }
 
 .card__like-button:hover {
-  opacity: 0.6;
+  opacity: 0.5;
+  cursor: pointer;
 }
