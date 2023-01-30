@@ -1,0 +1,121 @@
+.modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 0 19px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* visibility: hidden; */
+  /* opacity: 0; */
+  transition: visibility 0s linear 0.3s, opacity 0.3s linear;
+  z-index: 999;
+  box-sizing: border-box;
+}
+
+/* .modal-open-botton {
+  display: flex;
+} */
+
+.modal__container {
+  width: 430px;
+  height: 330px;
+  padding: 22px;
+  margin: auto;
+  background-color: white;
+  border-radius: 10px;
+  position: relative;
+  border: none;
+}
+
+.modal__close-button {
+  display: block;
+  border: none;
+  width: 40px;
+  height: 40px;
+  background-image: url(../images/Close\ Iconclose.svg);
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: absolute;
+  top: -35px;
+  right: -35px;
+  cursor: pointer;
+}
+
+.modal__heading {
+  font-family: "Inter", "Arial", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 29px;
+  height: 23px;
+  margin: 0 0 20px;
+  color: #000;
+}
+
+.modal__form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 54px;
+}
+
+.modal__form-input {
+  height: 50px;
+  border-top: 1px;
+  border-right: 1px;
+  border-left: 1px;
+  padding: 0;
+  margin-bottom: 30px;
+  border-color: rgba(0, 0, 0, 0.2);
+}
+.modal__form-input::placeholder::placeholder {
+  font-family: "Inter", "Arial", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000;
+}
+
+.modal__submit-button {
+  height: 50px;
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: 400;
+  padding: 0;
+  cursor: pointer;
+  margin-top: 18px;
+  color: white;
+  background-color: black;
+}
+
+.modal__submit-button:hover {
+  opacity: 0.8;
+}
+
+@media screen and (min-width: 320px) and (max-width: 700px) {
+  .modal__container {
+    width: 100%;
+  }
+  .modal__heading {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .modal__close-button {
+    width: 26px;
+    height: 26px;
+    left: calc(100% - 30px);
+    margin-bottom: 13px;
+  }
+
+  .modal__submit-button {
+    font-size: 14px;
+    line-height: 17px;
+  }
+}
