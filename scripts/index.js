@@ -86,7 +86,8 @@ function getCardElement(cardData) {
     previewImage.src = cardData.link;
     previewImage.alt = cardData.name;
     previewFooter.textContent = cardData.name;
-    previewModal.classList.toggle("modal_opened");
+    openModal(previewModal);
+    // previewModal.classList.toggle("modal_opened");
   });
   //open modal with previewimage modal
   // set card like button here
@@ -138,7 +139,8 @@ function renderCard(cardData, cardListEl) {
 addCardButton.addEventListener("click", () => {
   // cardTitleInput.value = cardTitle.textContext;
   // cardUrlInput.value = cardDescription.textContent;
-  cardEditModal.classList.add("modal_opened");
+  openModal(cardEditModal);
+  // cardEditModal.classList.add("modal_opened");
 });
 
 addCardForm.addEventListener("submit", (e) => {
