@@ -21,9 +21,9 @@
 .modal_opened {
   visibility: visible;
   opacity: 1;
-  /* transition: visibility 0s, opacity 0.5s linear; */
   transition-delay: 0s;
 }
+
 .modal__container {
   width: 430px;
   height: 330px;
@@ -45,9 +45,6 @@
   position: absolute;
   bottom: calc(100% + 5px);
   left: calc(100% + 5px);
-  /* visibility: hidden;
-  opacity: 0;
-  transition: visibility 0s, opacity 0.5s linear; */
   cursor: pointer;
 }
 
