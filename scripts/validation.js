@@ -94,7 +94,7 @@ const config = {
   formSelector: ".modal__form",
   inputSelector: ".modal__form-input",
   submitButtonSelector: ".modal__sunmit-button",
-  inactiveButtonClass: "modal__button_disabled",
+  inactiveButtonClass: "modal__submit-button_disabled",
   inputErrorClass: "modal__form-input_error",
   errorClass: "modal__error_visible",
 };
