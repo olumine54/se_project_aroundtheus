@@ -155,3 +155,7 @@ addCardForm.addEventListener("submit", (e) => {
 cardModalCloseButton.addEventListener("click", () => {
   closePopup(cardEditModal);
 });
+
+/* -------------------------------------------------------------------------- */
+/*                           This is a comment trial                          */
+/* -------------------------------------------------------------------------- */
