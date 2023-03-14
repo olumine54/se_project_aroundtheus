@@ -1,3 +1,4 @@
+console.log(config);
 const initialCards = [
   {
     name: "Yosimite Valley",
@@ -59,11 +60,23 @@ const cardModalCloseButton = cardEditModal.querySelector(
 
 const cardTitleInput = addCardForm.querySelector("#card-title-input");
 const cardUrlInput = addCardForm.querySelector("#card-url-input");
+console.log(config);
 
-const editFormValidator = document.querySelector("#profile-edit-form");
+// function openAddModal() {
+//   console.log(enableValidation);
+//   const inputElements = [...formEl.querySelectorAll(inputSelector)];
+//   const submitButton = formEl.querySelector(".modal__submit-button");
+//   toggleButtonState(inputElements, submitButton, formEl);
+//   openModal(addCardForm);
+// }
+// function closeAddModal() {
+//   closePopup(addCardForm);
+// }
+
+//const editFormValidator = document.querySelector("#profile-edit-form");
 // editFormValidator.enableValidation();
 
-const addFormValidator = document.querySelector("#card-add-form");
+//const addFormValidator = document.querySelector("#card-add-form");
 // addFormValidator.enableValidation();
 
 function handleEscUp(e) {
@@ -121,8 +134,17 @@ function getCardElement(cardData) {
 profileEditButton.addEventListener("click", () => {
   profileTitleInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
-  toggleButtonState(editFormValidator);
+  const formEl = profileEditModal.querySelector(config.formSelector);
+  console.log(formEl);
+  const inputElements = [...formEl.querySelectorAll(config.inputSelector)];
+  const submitButton = formEl.querySelector(".modal__submit-button");
+
+  //toggleButtonState(editFormValidator);
   openModal(profileEditModal);
+  toggleButtonState(inputElements, submitButton, formEl);
+  //toggleButtonState(inputEls, submitButton, options);
+  // RUN VALIDATOR
+  // here we run the validation function, whoch should validate only the form in THIS modal. And then set button toggled or not
 });
 
 profileCloseButton.addEventListener("click", () => {
@@ -162,7 +184,7 @@ cardEditModal.addEventListener("mousedown", closeModalOnRemoteClick);
 previewModal.addEventListener("mousedown", closeModalOnRemoteClick);
 
 addCardButton.addEventListener("click", () => {
-  toggleButtonState(addFormValidator);
+  //toggleButtonState(addFormValidator);
   openModal(cardEditModal);
   // cardEditModal.classList.add("modal_opened");
 });
