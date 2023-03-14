@@ -56,15 +56,33 @@ const addCardForm = cardEditModal.querySelector(".modal__form");
 const cardModalCloseButton = cardEditModal.querySelector(
   ".modal__close-button"
 );
-const cardTitleInput = addCardForm.querySelector("#card-title-input");
-const cardUrlInput = addCardForm.querySelector("#card-url-input");
+
+// const cardTitleInput = addCardForm.querySelector("#card-title-input");
+// const cardUrlInput = addCardForm.querySelector("#card-url-input");
+
+// const editFormValidator = document.querySelector("#profile-edit-form");
+// editFormValidator.enableValidation();
+
+// const addFormValidator = document.querySelector("#card-add-form");
+// addFormValidator.enableValidation();
+
+const ESC_KEYCODE = 27;
+
+function handleEscUp(evt) {
+  if (evt.which === ESC_KEYCODE) {
+    const activeModal = document.querySelector(".modal__opened");
+    closePopup(activeModal);
+  }
+}
 
 function closePopup(modal) {
   modal.classList.remove("modal_opened");
+  document.removeEventListener("keyup", handleEscUp);
 }
 
 function openModal(modal) {
   modal.classList.add("modal_opened");
+  document.addEventListener("keyup", handleEscUp);
 }
 
 function getCardElement(cardData) {
@@ -80,36 +98,32 @@ function getCardElement(cardData) {
     deleteButton.classList.toggle("card__delete-button");
     cardElement.remove();
   });
-  // add clicklistener to the cardImage element
 
   cardImageEl.addEventListener("click", () => {
     previewImage.src = cardData.link;
     previewImage.alt = cardData.name;
     previewFooter.textContent = cardData.name;
     openModal(previewModal);
-    // previewModal.classList.toggle("modal_opened");
   });
-  //open modal with previewimage modal
-  // set card like button here
+
   const likeButton = cardElement.querySelector(".card__like-button");
   likeButton.addEventListener("click", () => {
     likeButton.classList.toggle("card__like-button_active");
   });
 
-  // set the path to the image to the link field of the object
   cardImageEl.src = cardData.link;
-  // set the image alt text to the name field of the object
+
   cardImageEl.alt = cardData.name;
-  // set the card title to the name field of the object, too
+
   cardTitleEl.textContent = cardData.name;
-  // return the ready HTML element with the filled-in data
+
   return cardElement;
 }
 
 profileEditButton.addEventListener("click", () => {
   profileTitleInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
-  // profileEditModal.classList.add("modal_opened");
+  //toggleButtonState(editFormValidator);
   openModal(profileEditModal);
 });
 
@@ -136,12 +150,30 @@ function renderCard(cardData, cardListEl) {
   cardListEl.prepend(cardElement);
 }
 
+function closeModalOnRemoteClick(evt) {
+  if (
+    evt.target === evt.currentTarget ||
+    evt.target.classList.contains("modal__close-button")
+  ) {
+    closePopup(evt.target);
+  }
+}
+
+profileEditModal.addEventListener("mousedown", closeModalOnRemoteClick);
+cardEditModal.addEventListener("mousedown", closeModalOnRemoteClick);
+previewModal.addEventListener("mousedown", closeModalOnRemoteClick);
+
 addCardButton.addEventListener("click", () => {
-  // cardTitleInput.value = cardTitle.textContext;
-  // cardUrlInput.value = cardDescription.textContent;
+  //toggleButtonState(addFormValidator);
   openModal(cardEditModal);
   // cardEditModal.classList.add("modal_opened");
 });
+
+function handleMouseDown(evt) {
+  if (evt.target.classList.contains("modal__opened")) {
+    closePopup(evt.target);
+  }
+}
 
 addCardForm.addEventListener("submit", (e) => {
   e.preventDefault();
