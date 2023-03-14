@@ -66,11 +66,11 @@ const cardModalCloseButton = cardEditModal.querySelector(
 // const addFormValidator = document.querySelector("#card-add-form");
 // addFormValidator.enableValidation();
 
-const ESC_KEYCODE = 27;
+//const ESC_KEYCODE = 27;
 
-function handleEscUp(evt) {
-  if (evt.which === ESC_KEYCODE) {
-    const activeModal = document.querySelector(".modal__opened");
+function handleEscUp(e) {
+  if (e.key === "Escape") {
+    const activeModal = document.querySelector(".modal_opened");
     closePopup(activeModal);
   }
 }
