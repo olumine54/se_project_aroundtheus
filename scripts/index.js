@@ -106,7 +106,7 @@ function getCardElement(cardData) {
   const deleteButton = cardElement.querySelector(".card__delete-button");
   //add event listener
   deleteButton.addEventListener("click", () => {
-    deleteButton.classList.toggle("card__delete-button");
+    //deleteButton.classList.toggle("card__delete-button");
     cardElement.remove();
   });
 
@@ -130,16 +130,15 @@ function getCardElement(cardData) {
 
   return cardElement;
 }
+//inputEls.forEach((inputEl) => {});
 
 profileEditButton.addEventListener("click", () => {
   profileTitleInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
   const formEl = profileEditModal.querySelector(config.formSelector);
-  console.log(formEl);
   const inputElements = [...formEl.querySelectorAll(config.inputSelector)];
   const submitButton = formEl.querySelector(".modal__submit-button");
-
-  //toggleButtonState(editFormValidator);
+  //checkInputValidity(formEl, inputEl, options);
   openModal(profileEditModal);
   toggleButtonState(inputElements, submitButton, formEl);
   //toggleButtonState(inputEls, submitButton, options);
@@ -147,9 +146,9 @@ profileEditButton.addEventListener("click", () => {
   // here we run the validation function, whoch should validate only the form in THIS modal. And then set button toggled or not
 });
 
-profileCloseButton.addEventListener("click", () => {
-  closePopup(profileEditModal);
-});
+// profileCloseButton.addEventListener("click", () => {
+//   closePopup(profileEditModal);
+// });
 
 profileEditForm.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -158,9 +157,9 @@ profileEditForm.addEventListener("submit", (e) => {
   closePopup(profileEditModal);
 });
 
-previewCloseModal.addEventListener("click", (e) => {
-  closePopup(previewModal);
-});
+// previewCloseModal.addEventListener("click", (e) => {
+//   closePopup(previewModal);
+// });
 
 initialCards.reverse().forEach((cardData) => renderCard(cardData, cardListEl));
 
@@ -175,7 +174,7 @@ function closeModalOnRemoteClick(evt) {
     evt.target === evt.currentTarget ||
     evt.target.classList.contains("modal__close-button")
   ) {
-    closePopup(evt.target);
+    closePopup(evt.currentTarget);
   }
 }
 
@@ -189,11 +188,11 @@ addCardButton.addEventListener("click", () => {
   // cardEditModal.classList.add("modal_opened");
 });
 
-function handleMouseDown(evt) {
-  if (evt.target.classList.contains("modal__opened")) {
-    closePopup(evt.target);
-  }
-}
+// function handleMouseDown(evt) {
+//   if (evt.target.classList.contains("modal__opened")) {
+//     closePopup(evt.target);
+//   }
+// }
 
 addCardForm.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -204,9 +203,9 @@ addCardForm.addEventListener("submit", (e) => {
   addCardForm.reset();
 });
 
-cardModalCloseButton.addEventListener("click", () => {
-  closePopup(cardEditModal);
-});
+// cardModalCloseButton.addEventListener("click", () => {
+//   closePopup(cardEditModal);
+// });
 
 /* -------------------------------------------------------------------------- */
 /*                           This is a comment trial                          */
