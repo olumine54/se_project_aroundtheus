@@ -1,4 +1,6 @@
-console.log(config);
+import FormValidator from "./formValidator.js";
+import Card from "./Card.js";
+
 const initialCards = [
   {
     name: "Yosimite Valley",
@@ -26,13 +28,21 @@ const initialCards = [
   },
 ];
 
+const cardData = {
+  name: "Yosimite Valley",
+  link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
+};
+
+const card = new Card(cardData, "#card-template");
+card.getView();
+
 const profileEditButton = document.querySelector("#profile-edit-button");
 
 const profileEditModal = document.querySelector("#profile-edit-modal");
 
-const profileCloseButton = profileEditModal.querySelector(
-  ".modal__close-button"
-);
+// const profileCloseButton = profileEditModal.querySelector(
+//   ".modal__close-button"
+// );
 
 const profileTitle = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
@@ -43,7 +53,7 @@ const profileDescriptionInput = document.querySelector(
 // preview moda
 const previewModal = document.querySelector("#preview-image-modal");
 const previewImage = document.querySelector(".modal__preview-image");
-const previewCloseModal = previewModal.querySelector("#preview-close-button");
+// const previewCloseModal = previewModal.querySelector("#preview-close-button");
 const previewFooter = document.querySelector(".modal__preview-footer");
 
 const profileEditForm = profileEditModal.querySelector(".modal__form");
@@ -60,24 +70,25 @@ const cardModalCloseButton = cardEditModal.querySelector(
 
 const cardTitleInput = addCardForm.querySelector("#card-title-input");
 const cardUrlInput = addCardForm.querySelector("#card-url-input");
-console.log(config);
 
-// function openAddModal() {
-//   console.log(enableValidation);
-//   const inputElements = [...formEl.querySelectorAll(inputSelector)];
-//   const submitButton = formEl.querySelector(".modal__submit-button");
-//   toggleButtonState(inputElements, submitButton, formEl);
-//   openModal(addCardForm);
-// }
-// function closeAddModal() {
-//   closePopup(addCardForm);
-// }
+/* -------------------------------------------------------------------------- */
+/*                                 validation                                 */
+/* -------------------------------------------------------------------------- */
 
-//const editFormValidator = document.querySelector("#profile-edit-form");
+const config = {
+  inputSelector: ".modal__form-input",
+  submitButtonSelector: ".modal__submit-button",
+  inactiveButtonClass: "modal__submit-button_disabled",
+  inputErrorClass: "modal__form-input_error",
+  errorClass: "modal__error_visible",
+};
+
+const editFormElement = profileEditModal.querySelector(".modal__form");
+const addFormElement = profileEditForm.querySelector(".modal__form");
+
+const editFormValidator = new FormValidator(config, editFormElement);
 // editFormValidator.enableValidation();
-
-//const addFormValidator = document.querySelector("#card-add-form");
-// addFormValidator.enableValidation();
+const addFormValidator = new FormValidator(config, addFormElement);
 
 function handleEscUp(e) {
   if (e.key === "Escape") {
@@ -130,25 +141,16 @@ function getCardElement(cardData) {
 
   return cardElement;
 }
-//inputEls.forEach((inputEl) => {});
 
 profileEditButton.addEventListener("click", () => {
   profileTitleInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
-  const formEl = profileEditModal.querySelector(config.formSelector);
+  const formEl = profileEditModal.querySelector(".modal__form");
   const inputElements = [...formEl.querySelectorAll(config.inputSelector)];
   const submitButton = formEl.querySelector(".modal__submit-button");
-  //checkInputValidity(formEl, inputEl, options);
   openModal(profileEditModal);
-  toggleButtonState(inputElements, submitButton, formEl);
-  //toggleButtonState(inputEls, submitButton, options);
-  // RUN VALIDATOR
-  // here we run the validation function, whoch should validate only the form in THIS modal. And then set button toggled or not
+  editFormValidator.toggleButtonState(inputElements, submitButton, formEl);
 });
-
-// profileCloseButton.addEventListener("click", () => {
-//   closePopup(profileEditModal);
-// });
 
 profileEditForm.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -156,10 +158,6 @@ profileEditForm.addEventListener("submit", (e) => {
   profileDescription.textContent = profileDescriptionInput.value;
   closePopup(profileEditModal);
 });
-
-// previewCloseModal.addEventListener("click", (e) => {
-//   closePopup(previewModal);
-// });
 
 initialCards.reverse().forEach((cardData) => renderCard(cardData, cardListEl));
 
@@ -188,12 +186,6 @@ addCardButton.addEventListener("click", () => {
   // cardEditModal.classList.add("modal_opened");
 });
 
-// function handleMouseDown(evt) {
-//   if (evt.target.classList.contains("modal__opened")) {
-//     closePopup(evt.target);
-//   }
-// }
-
 addCardForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const name = cardTitleInput.value;
@@ -202,10 +194,6 @@ addCardForm.addEventListener("submit", (e) => {
   closePopup(cardEditModal);
   addCardForm.reset();
 });
-
-// cardModalCloseButton.addEventListener("click", () => {
-//   closePopup(cardEditModal);
-// });
 
 /* -------------------------------------------------------------------------- */
 /*                           This is a comment trial                          */

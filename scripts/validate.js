@@ -1,3 +1,5 @@
+import { config } from "./index.js";
+
 // enabling validation by calling enableValidation()
 // pass all the settings on call
 
@@ -38,7 +40,7 @@ function enableButton(submitButton, { inactiveButtonClass }) {
   submitButton.disabled = false;
 }
 
-function toggleButtonState(inputEls, submitButton, { inactiveButtonClass }) {
+function toggleButtonState(inputEls, submitButton) {
   if (hasInvalidInput(inputEls)) {
     disableButton(submitButton, { inactiveButtonClass });
   } else {
@@ -94,14 +96,5 @@ function enableValidation(options) {
     // reset error messages
   });
 }
-
-const config = {
-  formSelector: ".modal__form",
-  inputSelector: ".modal__form-input",
-  submitButtonSelector: ".modal__submit-button",
-  inactiveButtonClass: "modal__submit-button_disabled",
-  inputErrorClass: "modal__form-input_error",
-  errorClass: "modal__error_visible",
-};
 
 enableValidation(config);
