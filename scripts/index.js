@@ -1,5 +1,6 @@
-import FormValidator from "./formValidator.js";
-import Card from "./Card.js";
+import FormValidator from "./FormValidator.js";
+
+import { openModal, closeModalOnRemoteClick } from "./Utils.js";
 
 const initialCards = [
   {
@@ -33,8 +34,8 @@ const cardData = {
   link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
 };
 
-const card = new Card(cardData, "#card-template");
-card.getView();
+// const card = new Card(cardData, "#card-template");
+// card.getView();
 
 const profileEditButton = document.querySelector("#profile-edit-button");
 
@@ -84,28 +85,13 @@ const config = {
 };
 
 const editFormElement = profileEditModal.querySelector(".modal__form");
-const addFormElement = profileEditForm.querySelector(".modal__form");
+const addFormElement = cardEditModal.querySelector(".modal__form");
 
 const editFormValidator = new FormValidator(config, editFormElement);
-// editFormValidator.enableValidation();
+editFormValidator.enableValidation();
 const addFormValidator = new FormValidator(config, addFormElement);
 
-function handleEscUp(e) {
-  if (e.key === "Escape") {
-    const activeModal = document.querySelector(".modal_opened");
-    closePopup(activeModal);
-  }
-}
-
-function closePopup(modal) {
-  modal.classList.remove("modal_opened");
-  document.removeEventListener("keyup", handleEscUp);
-}
-
-function openModal(modal) {
-  modal.classList.add("modal_opened");
-  document.addEventListener("keyup", handleEscUp);
-}
+addFormValidator.enableValidation();
 
 function getCardElement(cardData) {
   // clone the template element with all its content and store it in a cardElement variable
@@ -149,7 +135,7 @@ profileEditButton.addEventListener("click", () => {
   const inputElements = [...formEl.querySelectorAll(config.inputSelector)];
   const submitButton = formEl.querySelector(".modal__submit-button");
   openModal(profileEditModal);
-  editFormValidator.toggleButtonState(inputElements, submitButton, formEl);
+  editFormValidator.toggleButtonState();
 });
 
 profileEditForm.addEventListener("submit", (e) => {
@@ -167,15 +153,6 @@ function renderCard(cardData, cardListEl) {
   cardListEl.prepend(cardElement);
 }
 
-function closeModalOnRemoteClick(evt) {
-  if (
-    evt.target === evt.currentTarget ||
-    evt.target.classList.contains("modal__close-button")
-  ) {
-    closePopup(evt.currentTarget);
-  }
-}
-
 profileEditModal.addEventListener("mousedown", closeModalOnRemoteClick);
 cardEditModal.addEventListener("mousedown", closeModalOnRemoteClick);
 previewModal.addEventListener("mousedown", closeModalOnRemoteClick);
@@ -183,6 +160,7 @@ previewModal.addEventListener("mousedown", closeModalOnRemoteClick);
 addCardButton.addEventListener("click", () => {
   //toggleButtonState(addFormValidator);
   openModal(cardEditModal);
+  addFormValidator.toggleButtonState();
   // cardEditModal.classList.add("modal_opened");
 });
 
