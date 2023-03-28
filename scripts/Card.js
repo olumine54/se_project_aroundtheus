@@ -1,3 +1,7 @@
+import handleEscUp from "./utils.js";
+import closePopup from "./utils.js";
+import openModal from "./utils.js";
+import closeModalOnRemoteClick from "./utils.js";
 export default class Card {
   constructor({ name, link }, cardSelector) {
     this._name = name;
