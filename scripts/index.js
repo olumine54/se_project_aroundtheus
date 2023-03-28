@@ -1,6 +1,6 @@
 import FormValidator from "./FormValidator.js";
 
-import { openModal, closeModalOnRemoteClick } from "./Utils.js";
+import { openModal, closeModalOnRemoteClick, closePopup } from "./Utils.js";
 
 const initialCards = [
   {
