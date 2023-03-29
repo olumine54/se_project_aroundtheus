@@ -8,17 +8,14 @@ class Card {
   }
 
   getCardElement() {
-    this._getView()
-      .querySelector(this._cardSelector)
-      .content.querySelector(".card")
-      .cloneNode(true);
+    this._cardElement = this._getView();
 
     this._cardTitleEl = this._cardElement.querySelector(".card__title");
-    this._cardTitleEl.textContent = this._title;
+    this._cardTitleEl.textContent = this._name;
 
     this._cardImageEl = this._cardElement.querySelector(".card__image");
     this._cardImageEl.src = this._link;
-    this._cardImageEl.alt = this._title;
+    this._cardImageEl.alt = this._name;
 
     this._setEventListeners();
 
@@ -56,9 +53,10 @@ class Card {
     this.cardElement = null;
   }
   _handlePreviewImage() {
-    this._previewimage.src = this._link;
-    this._previewImageTitle.textContent = this._title;
-    this._previewImage.alt = this._title;
+    this._previewImage.src = this._link;
+    console.log;
+    this._previewImageTitle.textContent = this._name;
+    this._previewImage.alt = this._name;
 
     openModal(document.querySelector("#preview-Image-modal"));
   }

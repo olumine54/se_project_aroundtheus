@@ -31,13 +31,13 @@ const initialCards = [
   },
 ];
 
-const cardData = {
-  name: "Yosimite Valley",
-  link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
-};
+// const cardData = {
+//   name: "Yosimite Valley",
+//   link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
+// };
 
-const card = new Card(cardData, "#card-template");
-card.getCardElement();
+// const card = new Card(cardData, "#card-template");
+// card.getCardElement();
 
 const profileEditButton = document.querySelector("#profile-edit-button");
 
@@ -154,6 +154,7 @@ initialCards.reverse().forEach((cardData) => renderCard(cardData, cardListEl));
 
 // add new card button
 function renderCard(cardData, cardListEl) {
+  const card = new Card(cardData, "#card-template");
   const cardElement = card.getCardElement(cardData);
   cardListEl.prepend(cardElement);
 }
