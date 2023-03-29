@@ -71,8 +71,8 @@ export default class FormValidator {
       e.preventDefault();
 
       // reset and disable button
-      formEl.addEventListener("reset", () => {
-        this._disableButton(submitButton, options);
+      this._formEl.addEventListener("reset", () => {
+        this._disableButton();
       });
     });
     this._setEventListeners();

@@ -1,3 +1,5 @@
+import Card from "./Card.js";
+
 import FormValidator from "./FormValidator.js";
 
 import { openModal, closeModalOnRemoteClick, closePopup } from "./Utils.js";
@@ -34,8 +36,8 @@ const cardData = {
   link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
 };
 
-// const card = new Card(cardData, "#card-template");
-// card.getView();
+const card = new Card(cardData, "#card-template");
+card.getCardElement();
 
 const profileEditButton = document.querySelector("#profile-edit-button");
 
@@ -93,47 +95,50 @@ const addFormValidator = new FormValidator(config, addFormElement);
 
 addFormValidator.enableValidation();
 
-function getCardElement(cardData) {
-  // clone the template element with all its content and store it in a cardElement variable
-  const cardElement = cardTemplate.cloneNode(true);
-  // access the card title and image and store them in variables
-  const cardImageEl = cardElement.querySelector(".card__image");
-  const cardTitleEl = cardElement.querySelector(".card__title");
-  //add delete button
-  const deleteButton = cardElement.querySelector(".card__delete-button");
-  //add event listener
-  deleteButton.addEventListener("click", () => {
-    //deleteButton.classList.toggle("card__delete-button");
-    cardElement.remove();
-  });
+// const cardElement = cardEditModal.querySelector(".card__list");
+// const previewEl = previewModal.querySelector(".card__list");
 
-  cardImageEl.addEventListener("click", () => {
-    previewImage.src = cardData.link;
-    previewImage.alt = cardData.name;
-    previewFooter.textContent = cardData.name;
-    openModal(previewModal);
-  });
+// function getCardElement(cardData) {
+//   // clone the template element with all its content and store it in a cardElement variable
+//   const cardElement = cardTemplate.cloneNode(true);
+//   // access the card title and image and store them in variables
+//   const cardImageEl = cardElement.querySelector(".card__image");
+//   const cardTitleEl = cardElement.querySelector(".card__title");
+//   //add delete button
+//   const deleteButton = cardElement.querySelector(".card__delete-button");
+//   //add event listener
+//   deleteButton.addEventListener("click", () => {
+//     //deleteButton.classList.toggle("card__delete-button");
+//     cardElement.remove();
+//   });
 
-  const likeButton = cardElement.querySelector(".card__like-button");
-  likeButton.addEventListener("click", () => {
-    likeButton.classList.toggle("card__like-button_active");
-  });
+//   cardImageEl.addEventListener("click", () => {
+//     previewImage.src = cardData.link;
+//     previewImage.alt = cardData.name;
+//     previewFooter.textContent = cardData.name;
+//     openModal(previewModal);
+//   });
 
-  cardImageEl.src = cardData.link;
+//   const likeButton = cardElement.querySelector(".card__like-button");
+//   likeButton.addEventListener("click", () => {
+//     likeButton.classList.toggle("card__like-button_active");
+//   });
 
-  cardImageEl.alt = cardData.name;
+//   cardImageEl.src = cardData.link;
 
-  cardTitleEl.textContent = cardData.name;
+//   cardImageEl.alt = cardData.name;
 
-  return cardElement;
-}
+//   cardTitleEl.textContent = cardData.name;
+
+//   return cardElement;
+// }
 
 profileEditButton.addEventListener("click", () => {
   profileTitleInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
-  const formEl = profileEditModal.querySelector(".modal__form");
-  const inputElements = [...formEl.querySelectorAll(config.inputSelector)];
-  const submitButton = formEl.querySelector(".modal__submit-button");
+  //const formEl = profileEditModal.querySelector(".modal__form");
+  // const inputElements = [...formEl.querySelectorAll(config.inputSelector)];
+  // const submitButton = formEl.querySelector(".modal__submit-button");
   openModal(profileEditModal);
   editFormValidator.toggleButtonState();
 });
@@ -149,7 +154,7 @@ initialCards.reverse().forEach((cardData) => renderCard(cardData, cardListEl));
 
 // add new card button
 function renderCard(cardData, cardListEl) {
-  const cardElement = getCardElement(cardData);
+  const cardElement = card.getCardElement(cardData);
   cardListEl.prepend(cardElement);
 }
 

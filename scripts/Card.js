@@ -1,11 +1,6 @@
-import {
-  handleEscUp,
-  closePopup,
-  openModal,
-  closeModalOnRemoteClick,
-} from "./Utils.js";
+import { handleEscUp, closePopup, openModal } from "./Utils.js";
 
-export default class Card {
+class Card {
   constructor({ name, link }, cardSelector) {
     this._name = name;
     this._link = link;
@@ -13,7 +8,7 @@ export default class Card {
   }
 
   getCardElement() {
-    this._cardElement = document
+    this._getView()
       .querySelector(this._cardSelector)
       .content.querySelector(".card")
       .cloneNode(true);
@@ -68,11 +63,12 @@ export default class Card {
     openModal(document.querySelector("#preview-Image-modal"));
   }
 
-  getView() {
-    this._cardElement = document
+  _getView() {
+    return document
       .querySelector(this._cardSelector)
       .content.querySelector(".card")
       .cloneNode(true);
-    this._setEventListeners();
   }
 }
+
+export default Card;
