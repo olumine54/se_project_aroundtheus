@@ -55,6 +55,7 @@ const profileDescriptionInput = document.querySelector(
 );
 // preview moda
 const previewModal = document.querySelector("#preview-image-modal");
+//console.log(previewModal);
 const previewImage = document.querySelector(".modal__preview-image");
 // const previewCloseModal = previewModal.querySelector("#preview-close-button");
 const previewFooter = document.querySelector(".modal__preview-footer");

@@ -53,12 +53,11 @@ class Card {
     this.cardElement = null;
   }
   _handlePreviewImage() {
-    this._previewImage.src = this._link;
-    console.log;
-    this._previewImageTitle.textContent = this._name;
-    this._previewImage.alt = this._name;
+    this._cardImageEl.src = this._link;
+    this._cardTitleEl.textContent = this._name;
+    this._cardImageEl.alt = this._name;
 
-    openModal(document.querySelector("#preview-Image-modal"));
+    openModal(document.querySelector("#preview-image-modal"));
   }
 
   _getView() {
