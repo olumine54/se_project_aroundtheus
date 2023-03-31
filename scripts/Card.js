@@ -53,11 +53,15 @@ class Card {
     this.cardElement = null;
   }
   _handlePreviewImage() {
-    this._cardImageEl.src = this._link;
-    this._cardTitleEl.textContent = this._name;
-    this._cardImageEl.alt = this._name;
+    const imageWindow = document.querySelector("#preview-image-modal");
+    const imageElement = imageWindow.querySelector(".modal__preview-image");
+    const imageFooter = imageWindow.querySelector(".modal__preview-footer");
+    //this._cardImageEl.src = this._link;
+    imageElement.src = this._link;
+    imageFooter.textContent = this._name;
+    imageElement.alt = this._name;
 
-    openModal(document.querySelector("#preview-image-modal"));
+    openModal(imageWindow);
   }
 
   _getView() {
