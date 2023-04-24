@@ -2,7 +2,10 @@ import Card from "./Card.js";
 
 import FormValidator from "./FormValidator.js";
 
-import { openModal, closeModalOnRemoteClick, closePopup } from "./Utils.js";
+import "../pages/index.css";
+import Section from "./Section.js";
+import Popup from "./popup.js";
+import UserInfo from "./UserInfo.js";
 
 const initialCards = [
   {
@@ -179,6 +182,17 @@ addCardForm.addEventListener("submit", (e) => {
   closePopup(cardEditModal);
   addCardForm.reset();
 });
+
+const section = new Section({ items, renderer: () => {} }, ".cards__list");
+
+section.renderItems();
+
+const getErInfo = userInfo.getUserInfo();
+
+const newModal = new PopupWithForm("#profile-edit-modal", () => {});
+newCardPopup.open();
+
+newCardPopup.close();
 
 /* -------------------------------------------------------------------------- */
 /*                           This is a comment trial                          */
