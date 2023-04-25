@@ -1,7 +1,14 @@
 import Popup from "./popup.js";
 
-class PopupWithImage extends Popup {
-  open() {
-    super.open();
+export default class PopupWithImage extends Popup {
+  constructor(cardSelector) {
+    super(cardSelector);
+  }
+
+  openModal() {
+    this._popupElement.classList.add("modal_opened");
+
+    document.addEventListener("keyup", handleEscUp);
+    modal.addEventListener("mousedown", handleMouseDown);
   }
 }

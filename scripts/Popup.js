@@ -4,11 +4,11 @@ export default class Popup {
   constructor({ cardSelector }) {
     this._modalElement = document.querySelector(cardSelector);
   }
-  open() {
+  _open() {
     modal.classList.add("modal_opened");
     document.addEventListener("keydown", handleEscClose);
   }
-  close() {
+  _close() {
     modal.classList.remove("modal_opened");
     document.removeEventListener("keydown", handleEscClose);
   }
