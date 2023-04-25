@@ -4,8 +4,10 @@ import FormValidator from "./FormValidator.js";
 
 import { openModal, closePopup, closeModalOnRemoteClick } from "./Utils.js";
 import Section from "./Section.js";
-import Popup from "./popup.js";
+import Popup from "./Popup.js";
 import UserInfo from "./UserInfo.js";
+import PopupWithForm from "./PopupWithForm.js";
+import PopupWithImage from "./PopupWithImage.js";
 
 const initialCards = [
   {
@@ -98,31 +100,62 @@ editFormValidator.enableValidation();
 const addFormValidator = new FormValidator(config, addFormElement);
 
 addFormValidator.enableValidation();
+const editPopup = new PopupWithForm({
+  PopupSelector: ".profileEditModal",
+  handleProfileSubmit,
+});
 
+const popupImage = new PopupWithImage("#preview-image-modal");
+popupImage.setEventListeners();
+
+// function renderCard({ item }) {
+//   new Card(item, "#card__template", handleImageClick).getView();
+//}
+
+const cardSection = new Section(
+  {
+    data: initialCards,
+    renderer: (item) => {
+      const card = new Card(
+        item,
+        "#card__template",
+        handleImageClick
+      ).getView();
+      cardSection.addItem(card);
+    },
+  },
+  config.cardSectionClass
+);
+
+cardSection.renderItems();
 // const profileEditFormElement = profileEditModal.querySelector(
 //   "#profile-modal-form"
 // );
 // const addCardEditFormElement = cardEditModal.querySelector(".modal__form");
-// const userInfo = new UserInfo({
-//   name: ".profile__title",
-//   job: ".profile__description",
-// });
+const userInfo = new UserInfo({
+  name: ".profile__title",
+  job: ".profile__description",
+});
 
 profileEditButton.addEventListener("click", () => {
   profileTitleInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
 
-  openModal(profileEditModal);
-  //userInfo.setUserInfo({ name, job });
+  editPopup.open(profileEditModal);
+  userInfo.setUserInfo({ name, job });
   editFormValidator.toggleButtonState();
 });
 
-profileEditForm.addEventListener("submit", (e) => {
+function handleProfileSubmit() {
   e.preventDefault();
   profileTitle.textContent = profileTitleInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
   closePopup(profileEditModal);
-});
+}
+
+// profileEditForm.addEventListener("submit", (e) => {
+
+// });
 
 initialCards.reverse().forEach((cardData) => renderCard(cardData, cardListEl));
 

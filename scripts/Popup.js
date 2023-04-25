@@ -1,8 +1,8 @@
 import Card from "./Card.js";
 
 export default class Popup {
-  constructor({ cardSelector }) {
-    this._modalElement = document.querySelector(cardSelector);
+  constructor({ popupSelector }) {
+    this._modalElement = document.querySelector(popupSelector);
   }
   _open() {
     modal.classList.add("modal_opened");
