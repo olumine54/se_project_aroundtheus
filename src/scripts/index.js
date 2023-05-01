@@ -1,10 +1,10 @@
+import "../pages/index.css";
 import Card from "./Card.js";
 
-import FormValidator from "./FormValidator.js";
+import FormValidator from "./formValidator.js";
 
-import { openModal, closePopup, closeModalOnRemoteClick } from "./Utils.js";
+//import { openModal, closePopup, closeModalOnRemoteClick } from "./Utils.js";
 import Section from "./Section.js";
-import Popup from "./Popup.js";
 import UserInfo from "./UserInfo.js";
 import PopupWithForm from "./PopupWithForm.js";
 import PopupWithImage from "./PopupWithImage.js";
@@ -101,11 +101,12 @@ const addFormValidator = new FormValidator(config, addFormElement);
 
 addFormValidator.enableValidation();
 const editPopup = new PopupWithForm({
-  PopupSelector: ".profileEditModal",
-  handleProfileSubmit,
+  popupSelector: "#profile-edit-modal",
+  handleFormSubmit: handleProfileSubmit,
 });
-
+editPopup.setEventListeners();
 const popupImage = new PopupWithImage("#preview-image-modal");
+//console.log(popupImage);
 popupImage.setEventListeners();
 
 // function renderCard({ item }) {
@@ -114,14 +115,9 @@ popupImage.setEventListeners();
 
 const cardSection = new Section(
   {
-    data: initialCards,
+    items: initialCards,
     renderer: (item) => {
-      const card = new Card(
-        item,
-        "#card__template",
-        handleImageClick
-      ).getView();
-      cardSection.addItem(card);
+      const card = new Card(item, "#card__template", handleImageClick); //.cardSection.addItem(card);
     },
   },
   config.cardSectionClass
@@ -138,11 +134,12 @@ const userInfo = new UserInfo({
 });
 
 profileEditButton.addEventListener("click", () => {
-  profileTitleInput.value = profileTitle.textContent;
-  profileDescriptionInput.value = profileDescription.textContent;
+  const userData = userInfo.getUserInfo();
+  profileTitleInput.value = userData.name;
+  profileDescriptionInput.value = userData.job;
 
-  editPopup.open(profileEditModal);
-  userInfo.setUserInfo({ name, job });
+  editPopup.open();
+
   editFormValidator.toggleButtonState();
 });
 
@@ -150,7 +147,11 @@ function handleProfileSubmit() {
   e.preventDefault();
   profileTitle.textContent = profileTitleInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
-  closePopup(profileEditModal);
+  editPopup.close();
+}
+
+function handleImageClick() {
+  popupImage.open();
 }
 
 // profileEditForm.addEventListener("submit", (e) => {
@@ -166,13 +167,13 @@ function renderCard(cardData, cardListEl) {
   cardListEl.prepend(cardElement);
 }
 
-profileEditModal.addEventListener("mousedown", closeModalOnRemoteClick);
-cardEditModal.addEventListener("mousedown", closeModalOnRemoteClick);
-previewModal.addEventListener("mousedown", closeModalOnRemoteClick);
+// profileEditModal.addEventListener("mousedown", closeModalOnRemoteClick);
+// cardEditModal.addEventListener("mousedown", closeModalOnRemoteClick);
+// previewModal.addEventListener("mousedown", closeModalOnRemoteClick);
 
 addCardButton.addEventListener("click", () => {
   //toggleButtonState(addFormValidator);
-  openModal(cardEditModal);
+  editPopup.open(cardEditModal);
   addFormValidator.toggleButtonState();
   // cardEditModal.classList.add("modal_opened");
 });
@@ -182,7 +183,7 @@ addCardForm.addEventListener("submit", (e) => {
   const name = cardTitleInput.value;
   const link = cardUrlInput.value;
   renderCard({ name, link }, cardListEl);
-  closePopup(cardEditModal);
+  editPopup.close(cardEditModal);
   addCardForm.reset();
 });
 

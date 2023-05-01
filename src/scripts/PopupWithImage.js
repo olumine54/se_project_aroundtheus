@@ -3,13 +3,13 @@ import Popup from "./Popup.js";
 export default class PopupWithImage extends Popup {
   constructor(popupSelector) {
     super(popupSelector);
-    this._popupElement = document.querySelector(popupSelector);
+    this._modalElement = document.querySelector(popupSelector);
   }
   open() {
     super.open();
-    this._popupElement.src = cardImageEl.src;
-    this._popupElement.name = cardImageEl.alt;
-    this._popupElement.name = cardTitleEl.textContent;
+    this._modalElement.src = cardImageEl.src;
+    this._modalElement.name = cardImageEl.alt;
+    this._modalElement.name = cardTitleEl.textContent;
   }
   close() {
     super.close();
