@@ -1,4 +1,4 @@
-import { config } from "./index.js";
+import { config } from "../pages/index.js";
 
 // enabling validation by calling enableValidation()
 // pass all the settings on call

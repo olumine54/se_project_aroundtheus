@@ -1,11 +1,11 @@
-import { handleEscUp, closePopup, openModal } from "./Utils.js";
+//import { handleEscUp, closePopup, openModal } from "./Utils.js";
 
 class Card {
-  constructor({ name, link }, cardSelector) {
+  constructor({ name, link }, cardSelector, handleCardClick) {
     this._name = name;
     this._link = link;
     this._cardSelector = cardSelector;
-    this._handleCardClick = this._handleCardClick;
+    this._handleCardClick = handleCardClick;
   }
 
   getCardElement() {
@@ -32,7 +32,7 @@ class Card {
 
     // handle click on image --> open the modal
     this._cardImageEl.addEventListener("click", () => {
-      this._handlePreviewImage();
+      this._handleCardClick(this._cardImageEl, this._cardTitleEl);
     });
 
     // delete button
@@ -53,17 +53,17 @@ class Card {
     this._cardElement.remove();
     this.cardElement = null;
   }
-  _handlePreviewImage() {
-    const imageWindow = document.querySelector("#preview-image-modal");
-    const imageElement = imageWindow.querySelector(".modal__preview-image");
-    const imageFooter = imageWindow.querySelector(".modal__preview-footer");
-    //this._cardImageEl.src = this._link;
-    imageElement.src = this._link;
-    imageFooter.textContent = this._name;
-    imageElement.alt = this._name;
+  // _handlePreviewImage() {
+  //   const imageWindow = document.querySelector("#preview-image-modal");
+  //   const imageElement = imageWindow.querySelector(".modal__preview-image");
+  //   const imageFooter = imageWindow.querySelector(".modal__preview-footer");
+  //   //this._cardImageEl.src = this._link;
+  //   imageElement.src = this._link;
+  //   imageFooter.textContent = this._name;
+  //   imageElement.alt = this._name;
 
-    openModal(imageWindow);
-  }
+  //   // openModal(imageWindow);
+  // }
 
   _getView() {
     return document

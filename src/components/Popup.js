@@ -1,5 +1,3 @@
-//import Card from "./Card.js";
-
 export default class Popup {
   constructor({ popupSelector }) {
     this._modalElement = document.querySelector(popupSelector);
@@ -16,10 +14,7 @@ export default class Popup {
   }
   _handleEscClose(evt) {
     const ESC_KEYCODE = 27;
-    //this._handleEscClose = (evt) => {
-    //console.log(evt.which);
     if (evt.which === ESC_KEYCODE) {
-      //const activeModal = document.querySelector(".modal_opened");
       this.close();
     }
     // };
@@ -28,10 +23,6 @@ export default class Popup {
     this._modalElement.addEventListener("mousedown", (evt) => {
       this._closeModalOnRemoteClick(evt);
     });
-
-    // modalCloseButton.addEventListener("click", () => {
-    //   close(activeModal);
-    // });
   }
   _closeModalOnRemoteClick(evt) {
     if (
