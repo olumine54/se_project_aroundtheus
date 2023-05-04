@@ -8,10 +8,15 @@ export default class Section {
   renderItems() {
     this.items.forEach((item) => this.renderer(item));
   }
-  // renderer() {
-  //   const card = new Card(cardData, "#card-template");
+  // renderItems() {
+  //   console.log(this.items);
+  //   this.items.forEach((item) => {
+  //     const card = this.renderer(item);
+  //     this.addItem(card);
+  //   });
   // }
-  addItem() {
-    this.container.prepend(item);
+
+  addItem(item) {
+    // this.container.prepend(item); // <--- and here we make a prepend
   }
 }

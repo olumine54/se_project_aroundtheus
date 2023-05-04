@@ -8,7 +8,7 @@ export default class UserInfo {
     return { name: this.name.textContent, job: this.job.textContent };
   }
   setUserInfo({ title, job }) {
-    this.title.textContent = title.value;
-    this.job.textContent = job.value;
+    this.name.textContent = title;
+    this.job.textContent = job;
   }
 }

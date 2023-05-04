@@ -1,5 +1,3 @@
-//import { handleEscUp, closePopup, openModal } from "./Utils.js";
-
 class Card {
   constructor({ name, link }, cardSelector, handleCardClick) {
     this._name = name;
