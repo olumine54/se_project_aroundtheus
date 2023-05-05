@@ -95,10 +95,24 @@ function handleImageClick(cardImageEl, cardTitleEl) {
 
 // add new card button
 function renderCard(cardData, cardListEl) {
-  const card = new Card(cardData, "#card-template", handleImageClick);
+  const card = new Card(
+    {
+      name: cardData.name,
+      link: cardData.link,
+    },
+    "#card-template",
+    () => {
+      handleImageClick; // replace handler
+    }
+  );
+  // const card = new Card({
+  //   cardData,
+  //   cardSelector: "#card-template",
+  //   handleImageClick: { name, link },
+  // });
   const cardElement = card.getCardElement(cardData);
-  // return cardElement;
-  cardListEl.prepend(cardElement); // <---- here we make a prepend
+  cardSection.addItem(cardElement);
+  //cardListEl.prepend(cardElement); // <---- here we make a prepend
 }
 
 function handleCrdFormSubmit(inputValues) {
