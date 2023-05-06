@@ -49,7 +49,7 @@
 }
 
 .modal__close-button:hover {
-  opacity: 0.6px;
+  opacity: 0.6;
   transition: 0.5s;
   cursor: pointer;
 }

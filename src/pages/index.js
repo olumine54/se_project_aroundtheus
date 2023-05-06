@@ -42,7 +42,7 @@ addFormValidator.enableValidation();
 
 const cardPopup = new PopupWithForm({
   popupSelector: "#card-edit-modal",
-  handleFormSubmit: handleCrdFormSubmit,
+  handleFormSubmit: handleCardFormSubmit,
 });
 
 cardPopup.setEventListeners();
@@ -114,7 +114,7 @@ function renderCard(cardData, cardListEl) {
   //cardListEl.prepend(cardElement); // <---- here we make a prepend
 }
 
-function handleCrdFormSubmit(inputValues) {
+function handleCardFormSubmit(inputValues) {
   // HANDLE CODE BELOW, no arguments
   renderCard(inputValues);
   cardPopup.close();
@@ -135,13 +135,13 @@ addCardButton.addEventListener("click", () => {
 //   addCardForm.reset();
 // });
 
-const addCardForm = new PopupWithForm({
-  popupSelector: "#card-edit-modal",
-  handleFormSubmit: (data) => {
-    //cardSection.addItem(renderCard(data, cardListEl));
-  },
-});
-addCardForm.setEventListeners();
+// const addCardForm = new PopupWithForm({
+//   popupSelector: "#card-edit-modal",
+//   handleFormSubmit: (data) => {
+//     //cardSection.addItem(renderCard(data, cardListEl));
+//   },
+// });
+// addCardForm.setEventListeners();
 
 /* -------------------------------------------------------------------------- */
 /*                           This is a comment trial                          */
