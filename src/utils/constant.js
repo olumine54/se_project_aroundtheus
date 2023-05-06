@@ -65,4 +65,5 @@ export const config = {
   inactiveButtonClass: "modal__submit-button_disabled",
   inputErrorClass: "modal__form-input_error",
   errorClass: "modal__error_visible",
+  cardSectionClass: ".cards__list",
 };

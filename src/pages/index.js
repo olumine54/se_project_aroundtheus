@@ -95,15 +95,14 @@ function handleImageClick(cardImageEl, cardTitleEl) {
 
 // add new card button
 function renderCard(cardData, cardListEl) {
+  //console.log(cardData);
   const card = new Card(
     {
       name: cardData.name,
       link: cardData.link,
     },
     "#card-template",
-    () => {
-      handleImageClick; // replace handler
-    }
+    handleImageClick // replace handler
   );
   // const card = new Card({
   //   cardData,
@@ -139,7 +138,7 @@ addCardButton.addEventListener("click", () => {
 const addCardForm = new PopupWithForm({
   popupSelector: "#card-edit-modal",
   handleFormSubmit: (data) => {
-    cardSection.addItem(renderCard(data, cardListEl));
+    //cardSection.addItem(renderCard(data, cardListEl));
   },
 });
 addCardForm.setEventListeners();
