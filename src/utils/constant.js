@@ -39,9 +39,7 @@ export const profileDescriptionInput = document.querySelector(
 );
 // preview moda
 export const previewModal = document.querySelector("#preview-image-modal");
-//console.log(previewModal);
 export const previewImage = document.querySelector(".modal__preview-image");
-// const previewCloseModal = previewModal.querySelector("#preview-close-button");
 export const previewFooter = document.querySelector(".modal__preview-footer");
 
 export const profileEditForm = profileEditModal.querySelector(".modal__form");

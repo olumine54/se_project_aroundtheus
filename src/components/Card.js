@@ -51,17 +51,6 @@ class Card {
     this._cardElement.remove();
     this.cardElement = null;
   }
-  // _handlePreviewImage() {
-  //   const imageWindow = document.querySelector("#preview-image-modal");
-  //   const imageElement = imageWindow.querySelector(".modal__preview-image");
-  //   const imageFooter = imageWindow.querySelector(".modal__preview-footer");
-  //   //this._cardImageEl.src = this._link;
-  //   imageElement.src = this._link;
-  //   imageFooter.textContent = this._name;
-  //   imageElement.alt = this._name;
-
-  //   // openModal(imageWindow);
-  // }
 
   _getView() {
     return document

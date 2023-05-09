@@ -14,8 +14,6 @@ export default class PopupWithImage extends Popup {
   }
   open(cardImageEl, cardTitleEl) {
     super.open();
-    // console.log(cardImageEl);
-    // console.log(cardTitleEl);
     this._modalImage.src = cardImageEl.src;
     this._modalImage.name = cardImageEl.alt;
     this._modalTitle.textContent = cardTitleEl.textContent;
@@ -23,11 +21,4 @@ export default class PopupWithImage extends Popup {
   close() {
     super.close();
   }
-
-  // openModal() {
-  //   this._popupElement.classList.add("modal_opened");
-
-  //   document.addEventListener("keyup", handleEscUp);
-  //   modal.addEventListener("mousedown", handleMouseDown);
-  // }
 }
