@@ -1,9 +1,22 @@
 class Card {
-  constructor({ name, link }, cardSelector, handleCardClick) {
-    this._name = name;
-    this._link = link;
+  constructor(
+    data,
+    userId,
+    cardSelector,
+    handleCardClick,
+    handleDeleteClick,
+    handleLikeClick
+  ) {
+    this._name = data.name;
+    this._link = data.link;
+    this._id = data._id;
+    this._ownerId = data.ownerId;
+    this._likes = data.likes;
+    this.userId = userId;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
+    this.handleDeleteClick = handleDeleteClick;
+    this.handleLikeClick = handleLikeClick;
   }
 
   getCardElement() {
