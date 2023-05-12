@@ -26,6 +26,7 @@ import {
   addCardButton,
   cardEditModal,
   avatarModal,
+  avatarButton,
   deleteCard,
   avatarModalForm,
   cardModalCloseButton,
@@ -48,13 +49,14 @@ api.getInitialCards().then((cards) => {
 
 const editFormElement = profileEditModal.querySelector(".modal__form");
 const addFormElement = cardEditModal.querySelector(".modal__form");
+const avatarFormEl = avatarModal.querySelector(".modal__form");
 
 const editFormValidator = new FormValidator(config, editFormElement);
 editFormValidator.enableValidation();
 const addFormValidator = new FormValidator(config, addFormElement);
 
 addFormValidator.enableValidation();
-const avatarFormValidator = new FormValidator(config, avatarModal);
+const avatarFormValidator = new FormValidator(config, avatarFormEl);
 avatarFormValidator.enableValidation();
 
 const cardPopup = new PopupWithForm({
@@ -116,9 +118,9 @@ function handleAvatarFormSubmit(data) {
   editAvatar.renderLoading(true);
 
   api
-    .updateAvatar(data.previewUrl)
+    .updateAvatar(data.avatar)
     .then(() => {
-      userInfo.setAvatar(data.previewUrl);
+      userInfo.setAvatarInfo(data.avatar);
       editAvatar.close();
     })
     .catch((err) => {
@@ -129,6 +131,7 @@ function handleAvatarFormSubmit(data) {
       editAvatar.renderLoading(false, "Save");
     });
 }
+avatarButton.addEventListener("click", () => editAvatar.open());
 
 function handleProfileSubmit(inputValues) {
   editPopup.renderLoading(true);

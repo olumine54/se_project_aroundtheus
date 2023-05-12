@@ -82,15 +82,15 @@
     </div>
     <!-- avatar change -->
     <div class="modal" id="avatar-modal">
-      <div class="modal__container">
-        <button class="modal__close"></button>
+      <div class="modal__container-avatar">
+        <button class="modal__close-button"></button>
         <h2 class="modal__heading">Change Profile Picture</h2>
         <form class="modal__form" id="avatar-modal-form">
           <label class="modal__label">
             <input
               type="url"
               name="avatar"
-              class="modal__input"
+              class="modal__form-input"
               id="avatar-image-url"
               placeholder="Image URL"
               required />
@@ -109,7 +109,7 @@
     <!-- modal for delete card -->
 
     <div class="modal" id="delete-card">
-      <div class="modal__container">
+      <div class="modal__container-delete">
         <h2 class="modal__heading">Are you sure?</h2>
         <form class="modal__form" id="delete-form">
           <button class="modal__close-button" id="delete-button" type="submit">
@@ -177,6 +177,7 @@
         <div class="card__description">
           <h2 class="card__title"></h2>
           <button class="card__like-button" type="button"></button>
+          <p class="card__likes-counter"></p>
         </div></li
     ></template>
   </body>

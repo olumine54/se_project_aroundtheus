@@ -34,6 +34,25 @@
   position: relative;
 }
 
+.modal__container-avatar {
+  background-color: #fff;
+  margin: auto;
+  padding: 36px;
+  border-radius: 10px;
+  position: relative;
+  width: 430px;
+  height: 272px;
+}
+
+.modal__container-delete {
+  background-color: #fff;
+  margin: auto;
+  padding: 36px;
+  border-radius: 10px;
+  position: relative;
+  width: 430px;
+}
+
 .modal__close-button {
   border: none;
   width: 40px;
@@ -157,6 +176,17 @@
   position: absolute;
   top: 50px;
   left: 0;
+}
+
+.modal__error-avatar {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.2;
+  color: #ff0000;
+  margin-top: 5px;
+  margin-bottom: 13px;
+  position: absolute;
+  top: 170px;
 }
 
 .modal__error-visible {

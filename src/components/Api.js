@@ -124,12 +124,12 @@ export default class Api {
         console.log(err); // log the error to the console
       });
   }
-  updateAvatar(previewUrl) {
-    return fetch(`${this.baseUrl}/user/me/preview`, {
+  updateAvatar(avatar) {
+    return fetch(`${this.baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: this.headers,
       body: JSON.stringify({
-        previewUrl,
+        avatar,
       }),
     })
       .then((res) => {

@@ -45,6 +45,7 @@ export const previewFooter = document.querySelector(".modal__preview-footer");
 export const profileEditForm = profileEditModal.querySelector(".modal__form");
 export const avatarModal = document.querySelector("#avatar-modal");
 export const avatarModalForm = document.querySelector("#avatar-modal-form");
+export const avatarButton = document.querySelector(".profile__avatar-edit-btn");
 export const deleteCard = document.querySelector("#delete-card");
 
 export const cardListEl = document.querySelector(".cards__list");
