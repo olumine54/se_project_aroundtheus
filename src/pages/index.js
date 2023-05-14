@@ -43,9 +43,10 @@ const api = new Api({
   },
 });
 
-api.getInitialCards().then((cards) => {
-  return cards;
-});
+// api.getInitialCards().then((cards) => {
+//   console.log({ cards });
+//   return cards;
+// });
 
 const editFormElement = profileEditModal.querySelector(".modal__form");
 const addFormElement = cardEditModal.querySelector(".modal__form");
@@ -101,7 +102,7 @@ deleteCardModal.setEventListeners();
 const userInfo = new UserInfo({
   name: ".profile__title",
   job: ".profile__description",
-  avatar: "#avatar-modal",
+  avatar: ".profile__image",
 });
 
 profileEditButton.addEventListener("click", () => {
@@ -119,8 +120,9 @@ function handleAvatarFormSubmit(data) {
 
   api
     .updateAvatar(data.avatar)
-    .then(() => {
-      userInfo.setAvatarInfo(data.avatar);
+    .then((res) => {
+      userInfo.setAvatarInfo({ avatar: res.avatar });
+
       editAvatar.close();
     })
     .catch((err) => {
@@ -194,18 +196,18 @@ function createCard(cardData) {
     (cardId) => {
       if (card.isLiked()) {
         api
-          .removeLikes(cardId)
+          .removeLike(cardId)
           .then((data) => {
-            card.updateLikes(data.likes);
+            card.setLikes(data.likes);
           })
           .catch((err) => {
             console.log(err);
           });
       } else {
         api
-          .addLikes(cardId)
+          .addLike(cardId)
           .then((data) => {
-            card.updateLikes(data.likes);
+            card.setLikes(data.likes);
           })
           .catch((err) => {
             console.log(err);
@@ -218,13 +220,14 @@ function createCard(cardData) {
 
 let cardSection;
 let userId;
-api.getApiInfo().then(([userData]) => {
+api.getApiInfo().then(([userData, cards]) => {
+  console.log({ cards });
   userId = userData._id;
   userInfo.setUserInfo({ title: userData.name, job: userData.about });
   userInfo.setAvatarInfo({ avatar: userData.avatar });
   cardSection = new Section(
     {
-      items: initialCards,
+      items: cards,
       renderer: (Cards) => {
         cardSection.addItem(createCard(Cards));
       },
@@ -240,9 +243,7 @@ function handleCardFormSubmit(inputValues) {
   api
     .addCard({ name: inputValues.name, link: inputValues.link })
     .then(() => {
-      // const addCard = createCard(cardData);
       cardPopup.close();
-      //cardSection.addItem(addCard.getView());
     })
     .catch((err) => {
       console.log(err);
