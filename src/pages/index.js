@@ -1,6 +1,6 @@
 import "../pages/index.css";
 import Card from "../components/Card.js";
-import Api from "../components/Api.js";
+import Api from "../utils/api.js";
 
 import FormValidator from "../components/formValidator.js";
 
@@ -33,7 +33,7 @@ import {
   cardTitleInput,
   cardUrlInput,
   config,
-} from "../utils/Constant";
+} from "../utils/constant";
 
 const api = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/group-12",
@@ -42,11 +42,6 @@ const api = new Api({
     "Content-Type": "application/json",
   },
 });
-
-// api.getInitialCards().then((cards) => {
-//   console.log({ cards });
-//   return cards;
-// });
 
 const editFormElement = profileEditModal.querySelector(".modal__form");
 const addFormElement = cardEditModal.querySelector(".modal__form");
@@ -86,26 +81,12 @@ const deleteCardModal = new PopupWithConfirmation("#delete-card");
 
 deleteCardModal.setEventListeners();
 
-// const cardSection = new Section(
-//   {
-//     items: initialCards,
-//     renderer: (item) => {
-//       // const card = new Card(item, "#card-template", handleImageClick);
-//       return renderCard(item, cardListEl);
-//     },
-//   },
-//   config.cardSectionClass
-// );
-
-// cardSection.renderItems();
-
 const userInfo = new UserInfo({
   name: ".profile__title",
   job: ".profile__description",
   avatar: ".profile__image",
 });
-
-profileEditButton.addEventListener("click", () => {
+function handleEditProfile() {
   const userData = userInfo.getUserInfo();
   profileTitleInput.value = userData.name;
   profileDescriptionInput.value = userData.job;
@@ -113,7 +94,9 @@ profileEditButton.addEventListener("click", () => {
   editPopup.open();
 
   editFormValidator.toggleButtonState();
-});
+}
+
+profileEditButton.addEventListener("click", handleEditProfile);
 
 function handleAvatarFormSubmit(data) {
   editAvatar.renderLoading(true);
@@ -139,9 +122,8 @@ function handleProfileSubmit(inputValues) {
   editPopup.renderLoading(true);
 
   api
-    .profileEdit({ name: inputValues.title, about: inputValues.job })
+    .updateProfileInfo({ name: inputValues.title, about: inputValues.job })
     .then((data) => {
-      console.log(data);
       userInfo.setUserInfo({ title: data.name, job: data.about });
       editPopup.close();
     })
@@ -153,24 +135,9 @@ function handleProfileSubmit(inputValues) {
     });
 }
 
-function handleImageClick(cardImageEl, cardTitleEl) {
-  popupImage.open(cardImageEl, cardTitleEl);
-}
-
-// add new card button
-function renderCard(cardData, cardListEl) {
-  const card = new Card(
-    {
-      name: cardData.name,
-      link: cardData.link,
-    },
-    userId,
-    "#card-template", // it should be userID
-    handleImageClick // must be selector
-  );
-  const cardElement = card.getCardElement(cardData);
-  cardSection.addItem(cardElement);
-}
+// function handleImageClick(cardImageEl, cardTitleEl) {
+//   popupImage.open(cardImageEl, cardTitleEl);
+// }
 
 function createCard(cardData) {
   const card = new Card(
@@ -185,11 +152,16 @@ function createCard(cardData) {
       deleteCardModal.open();
       deleteCardModal.setSubmitAction(() => {
         deleteCardModal.renderLoading(true);
-        api.deleteCard(cardId).then(() => {
-          card.deleteCard();
-          deleteCardModal.renderLoading(false);
-          deleteCardModal.close();
-        });
+        api
+          .deleteCard(cardId)
+          .then(() => {
+            card.deleteCard();
+            deleteCardModal.close();
+          })
+          .catch((err) => console.error(err))
+          .finally(() => {
+            deleteCardModal.renderLoading(false, "Yes");
+          });
       });
     },
 
@@ -221,15 +193,14 @@ function createCard(cardData) {
 let cardSection;
 let userId;
 api.getApiInfo().then(([userData, cards]) => {
-  console.log({ cards });
   userId = userData._id;
   userInfo.setUserInfo({ title: userData.name, job: userData.about });
   userInfo.setAvatarInfo({ avatar: userData.avatar });
   cardSection = new Section(
     {
       items: cards,
-      renderer: (Cards) => {
-        cardSection.addItem(createCard(Cards));
+      renderer: (cardData) => {
+        cardSection.addItem(createCard(cardData));
       },
     },
     ".cards__list"
@@ -242,7 +213,9 @@ function handleCardFormSubmit(inputValues) {
 
   api
     .addCard({ name: inputValues.name, link: inputValues.link })
-    .then(() => {
+    .then((data) => {
+      cardSection.addItem(createCard(data));
+      // real object you collected from the backend
       cardPopup.close();
     })
     .catch((err) => {
@@ -251,7 +224,7 @@ function handleCardFormSubmit(inputValues) {
     .finally(() => {
       cardPopup.renderLoading(false, "Create");
     });
-  renderCard(inputValues);
+  //renderCard(inputValues);
 }
 
 addCardButton.addEventListener("click", () => {

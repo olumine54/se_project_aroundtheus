@@ -1,3 +1,5 @@
+import { ESC_KEYCODE } from "../utils/constant";
+
 export default class Popup {
   constructor({ popupSelector }) {
     this._modalElement = document.querySelector(popupSelector);
@@ -12,7 +14,7 @@ export default class Popup {
     document.removeEventListener("keydown", this._handleEscClose);
   }
   _handleEscClose(evt) {
-    const ESC_KEYCODE = 27;
+    // const ESC_KEYCODE = 27;
     if (evt.which === ESC_KEYCODE) {
       this.close();
     }

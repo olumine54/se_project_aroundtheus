@@ -60,6 +60,7 @@ export const cardModalCloseButton = cardEditModal.querySelector(
 
 export const cardTitleInput = addCardForm.querySelector("#card-title-input");
 export const cardUrlInput = addCardForm.querySelector("#card-url-input");
+export const ESC_KEYCODE = 27;
 
 export const config = {
   inputSelector: ".modal__form-input",

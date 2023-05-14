@@ -68,11 +68,18 @@ export default class FormValidator {
     this._formEl.addEventListener("submit", (e) => {
       e.preventDefault();
 
-      // reset and disable button
-      this._formEl.addEventListener("reset", () => {
-        this._disableButton();
-      });
+      // // reset and disable button
+      // this._formEl.addEventListener("reset", () => {
+      //   this._disableButton();
+      // });
     });
     this._setEventListeners();
+  }
+
+  resetValidation() {
+    this._inputEls.forEach((inputEl) => {
+      this._hideInputError(inputEl);
+    });
+    this._toggleButtonState();
   }
 }
